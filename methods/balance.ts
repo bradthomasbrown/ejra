@@ -10,9 +10,17 @@ type Opts = {
 const method = 'eth_getBalance' as const
 const schema = q
 
-/** @overload */
-export function balance(opts:Opts&{ url:string }):Promise<bigint>
-/** @overload */
+/**
+ * overload for included url, note the return type
+ * @param options
+ * @overload
+ */
+export function balance(options:Opts&{ url:string }):Promise<bigint>
+/**
+ * overload with unspecified tag, defaults to 'latest'
+ * @param options
+ * @overload
+ */
 export function balance<
     A extends string,
     P extends readonly [A,'latest']
@@ -23,7 +31,11 @@ export function balance<
     params:P
     schema:typeof schema
 }
-/** @overload */
+/**
+ * overload with tag
+ * @param options
+ * @overload
+ */
 export function balance<
     A extends string,
     T extends Tag,
@@ -36,7 +48,11 @@ export function balance<
     params:P
     schema:typeof schema
 }
-// implementation
+/**
+ * either returns a request object that can be used with lib/call to get a balance
+ * or returns a balance if a url is included
+ * @param options
+ */
 export function balance<
     A extends string,
     T extends Tag
