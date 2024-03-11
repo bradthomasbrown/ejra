@@ -52,6 +52,7 @@ export function balance<
  * either returns a request object that can be used with lib/call to get a balance
  * or returns a balance if a url is included
  * @param options
+ * @function
  */
 export function balance<
     A extends string,
