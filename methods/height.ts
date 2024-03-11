@@ -1,3 +1,4 @@
+import z from 'https://deno.land/x/zod@v3.22.4/index.ts'
 import { q } from '../schemas/mod.ts'
 import { call } from '../lib/mod.ts'
 
@@ -11,7 +12,7 @@ const method = 'eth_blockNumber' as const
 const schema = q
 
 /** @overload */
-export function height(options:HeightOptions&{ url:string }):Promise<bigint>
+export function height(options:HeightOptions&{ url:string }):Promise<z.infer<typeof schema>>
 /** @overload */
 export function height():{
     method:typeof method
