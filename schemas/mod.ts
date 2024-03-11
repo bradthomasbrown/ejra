@@ -4,3 +4,4 @@
  */
 
 export * from './q.ts'
+export * from './log.ts'

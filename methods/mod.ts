@@ -7,3 +7,4 @@
 
 export * from './balance.ts'
 export * from './height.ts'
+export * from './logs.ts'
