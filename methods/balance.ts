@@ -1,8 +1,12 @@
-import { Tag } from '../types/mod.ts';
+import { Tag, EJRARequest } from '../types/mod.ts';
 import { q } from '../schemas/mod.ts'
 import { call } from '../lib/mod.ts'
 
-type Opts = {
+/**
+ * Options for balance
+ * @type
+ */
+export type BalanceOptions = {
     address:string
     tag?:Tag
     url?:string
@@ -11,15 +15,35 @@ const method = 'eth_getBalance' as const
 const schema = q
 
 /**
- * overload for included url, note the return type
- * @param options
- * @overload
+ * Returns a promise to an address' balance.
+ * @param options.address The address to get the balance of.
+ * @param options.tag An optional {@link Tag} to specify what block to get the balance from.
+ * @param options.url The node URL to query to get the balance.
+ * @returns {Promise<bigint>}
+ * 
+ * @example
+ * ```ts
+ * const url = 'https://eth.llamarpc.com'
+ * const address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+ * const balance = await m.balance({ address, url })
+ * console.log(balance) // 955603135939535365788n
+ * ```
  */
-export function balance(options:Opts&{ url:string }):Promise<bigint>
+export function balance(options:BalanceOptions&{ url:string }):Promise<bigint>
 /**
- * overload with unspecified tag, defaults to 'latest'
- * @param options
- * @overload
+ * Returns an {@link EJRARequest} that can be used to get an address' latest balance.
+ * @param options.address The address to get the balance of.
+ * @param options.url The node URL to query to get the balance.
+ * @returns {EJRARequest}
+ * 
+ * @example
+ * ```ts
+ * const url = 'https://eth.llamarpc.com'
+ * const address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+ * const balanceRequest = await m.balance({ address })
+ * const balance = await call({ request: balanceRequest, url })
+ * console.log(balance) // 955603135939535365788n
+ * ```
  */
 export function balance<
     A extends string,
@@ -32,9 +56,20 @@ export function balance<
     schema:typeof schema
 }
 /**
- * overload with tag
- * @param options
- * @overload
+ * Returns an {@link EJRARequest} that can be used to get an address' balance.
+ * @param options.address The address to get the balance of.
+ * @param options.tag A {@link Tag} to specify what block to get the balance from.
+ * @param options.url The node URL to query to get the balance.
+ * @returns {EJRARequest}
+ * 
+ * @example
+ * ```ts
+ * const url = 'https://eth.llamarpc.com'
+ * const address = '0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045'
+ * const balanceRequest = await m.balance({ address })
+ * const balance = await call({ request: balanceRequest, url, tag: 19408664n })
+ * console.log(balance) // 955603135939535365788n
+ * ```
  */
 export function balance<
     A extends string,
@@ -48,12 +83,6 @@ export function balance<
     params:P
     schema:typeof schema
 }
-/**
- * either returns a request object that can be used with lib/call to get a balance
- * or returns a balance if a url is included
- * @param options
- * @function
- */
 export function balance<
     A extends string,
     T extends Tag
@@ -64,6 +93,6 @@ export function balance<
 }) {
     const { address, tag, url } = options
     const params = [address, tag ?? 'latest'] as const
-    const ejrrq = { method, params, schema }
-    return url ? call({ url, ejrrq }) : ejrrq
+    const request = { method, params, schema }
+    return url ? call({ url, request }) : request
 }
