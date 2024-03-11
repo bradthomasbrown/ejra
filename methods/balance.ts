@@ -2,6 +2,7 @@ import z from 'https://deno.land/x/zod@v3.22.4/index.ts'
 import { Tag, EJRARequest as _EJRARequest } from '../types/mod.ts';
 import { q } from '../schemas/mod.ts'
 import { call } from '../lib/mod.ts'
+import { RLB } from 'https://deno.land/x/rlb@0.0.7/RLB.ts';
 
 /**
  * Options for balance
@@ -11,6 +12,7 @@ export type BalanceOptions = {
     address:string
     tag?:Tag
     url?:string
+    rlb?:RLB
 }
 const method = 'eth_getBalance' as const
 const schema = q
@@ -88,10 +90,11 @@ export function balance<
 >(options:{
     address:A
     tag?:T
-    url?:string
+    url?:string,
+    rlb?:RLB
 }) {
-    const { address, tag, url } = options
+    const { address, tag, url, rlb } = options
     const params = [address, tag ?? 'latest'] as const
     const request = { method, params, schema }
-    return url ? call({ url, request }) : request
+    return url ? call({ url, request, rlb }) : request
 }
