@@ -1,20 +1,60 @@
+import { Tag } from '../types/mod.ts';
 import { q } from '../schemas/mod.ts'
-import { Tag } from '../types/mod.ts'
-import { ejraCall } from '../lib/mod.ts'
+import { call } from '../lib/mod.ts'
 
-export function balance({
+type Opts = {
+    address:string
+    tag?:Tag
+    url?:string
+}
+const method = 'eth_getBalance' as const
+const schema = q
+
+/** @overload */
+export function balance(opts:Opts&{ url:string }):Promise<bigint>
+/** @overload */
+export function balance<
+    A extends string,
+    P extends readonly [A,'latest']
+>({
+    address
+}:{
+    address:A
+}):{
+    method:typeof method
+    params:P
+    schema:typeof schema
+}
+/** @overload */
+export function balance<
+    A extends string,
+    T extends Tag,
+    P extends [A,T]
+>({
     address,
-    tag='latest',
+    tag
+}:{
+    address:A
+    tag:T
+}):{
+    method:typeof method
+    params:P
+    schema:typeof schema
+}
+// implementation
+export function balance<
+    A extends string,
+    T extends Tag
+>({
+    address,
+    tag,
     url
 }:{
-    address:string
-    tag:Tag,
+    address:A
+    tag?:T
     url?:string
 }) {
-    const schema = q
-    const params = [address, tag] as const
-    const method = 'eth_getBalance' as const
+    const params = [address, tag ?? 'latest'] as const
     const ejrrq = { method, params, schema }
-    if (url) return ejraCall({ url, ejrrq })
-    else return ejrrq
+    return url ? call({ url, ejrrq }) : ejrrq
 }
