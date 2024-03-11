@@ -33,7 +33,6 @@ export function balance(options:BalanceOptions&{ url:string }):Promise<bigint>
 /**
  * Returns an {@link EJRARequest} that can be used to get an address' latest balance.
  * @param options.address The address to get the balance of.
- * @param options.url The node URL to query to get the balance.
  * @returns {EJRARequest}
  * 
  * @example
@@ -59,7 +58,6 @@ export function balance<
  * Returns an {@link EJRARequest} that can be used to get an address' balance.
  * @param options.address The address to get the balance of.
  * @param options.tag A {@link Tag} to specify what block to get the balance from.
- * @param options.url The node URL to query to get the balance.
  * @returns {EJRARequest}
  * 
  * @example
