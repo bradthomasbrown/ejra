@@ -1,1 +1,2 @@
-export * from './Tag.d.ts'
+export * from './Tag.ts'
+export * from './EJRARequest.ts'

@@ -1,4 +1,4 @@
-export * from './lib/mod.ts'
-export * from './methods/mod.ts'
-export * from './schemas/mod.ts'
-export * from './types/mod.ts'
+export * as lib from './lib/mod.ts'
+export * as methods from './methods/mod.ts'
+export * as schemas from './schemas/mod.ts'
+export * as types from './types/mod.ts'
