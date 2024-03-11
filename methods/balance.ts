@@ -52,6 +52,7 @@ export function balance<
     P extends readonly [A,'latest']
 >(options:{
     address:A
+    rlb?:RLB
 }):{
     method:typeof method
     params:P
@@ -79,6 +80,7 @@ export function balance<
 >(options:{
     address:A
     tag:T
+    rlb?:RLB
 }):{
     method:typeof method
     params:P

@@ -22,6 +22,7 @@ export function logs<
     P extends [F]
 >(options:{
     filter:F
+    rlb?:RLB
 }):{
     method:typeof method
     params:P
