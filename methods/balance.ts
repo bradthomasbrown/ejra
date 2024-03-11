@@ -16,9 +16,7 @@ export function balance(opts:Opts&{ url:string }):Promise<bigint>
 export function balance<
     A extends string,
     P extends readonly [A,'latest']
->({
-    address
-}:{
+>(options:{
     address:A
 }):{
     method:typeof method
@@ -30,10 +28,7 @@ export function balance<
     A extends string,
     T extends Tag,
     P extends [A,T]
->({
-    address,
-    tag
-}:{
+>(options:{
     address:A
     tag:T
 }):{
@@ -45,15 +40,12 @@ export function balance<
 export function balance<
     A extends string,
     T extends Tag
->({
-    address,
-    tag,
-    url
-}:{
+>(options:{
     address:A
     tag?:T
     url?:string
 }) {
+    const { address, tag, url } = options
     const params = [address, tag ?? 'latest'] as const
     const ejrrq = { method, params, schema }
     return url ? call({ url, ejrrq }) : ejrrq

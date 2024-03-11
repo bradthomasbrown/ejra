@@ -15,11 +15,10 @@ export function height():{
     schema:typeof schema
 }
 // implementation
-export function height({
-    url
-}:{
+export function height(options:{
     url?:string
 }={}) {
+    const { url } = options
     const ejrrq = { method, schema }
     return url ? call({ url, ejrrq }) : ejrrq
 }
