@@ -10,7 +10,7 @@ export async function call<
     P extends readonly unknown[],
     S extends z.ZodTypeAny
 >({
-    ejrrq: {
+    request: {
         method,
         params,
         schema
@@ -18,7 +18,7 @@ export async function call<
     url,
     rlb
 }:{
-    ejrrq:E
+    request:E
     url:string
     rlb?:RLB
 }) {
