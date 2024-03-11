@@ -1,4 +1,5 @@
-import { Tag, EJRARequest } from '../types/mod.ts';
+import z from 'https://deno.land/x/zod@v3.22.4/index.ts'
+import { Tag, EJRARequest as _EJRARequest } from '../types/mod.ts';
 import { q } from '../schemas/mod.ts'
 import { call } from '../lib/mod.ts'
 
@@ -29,7 +30,7 @@ const schema = q
  * console.log(balance) // 955603135939535365788n
  * ```
  */
-export function balance(options:BalanceOptions&{ url:string }):Promise<bigint>
+export function balance(options:BalanceOptions&{ url:string }):Promise<z.infer<typeof schema>>
 /**
  * Returns an {@link EJRARequest} that can be used to get an address' latest balance.
  * @param options.address The address to get the balance of.
