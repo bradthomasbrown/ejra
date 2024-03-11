@@ -2,7 +2,7 @@ import { q } from '../schemas/mod.ts'
 import { Tag } from '../types/mod.ts'
 import { ejraCall } from '../lib/mod.ts'
 
-export default function balance({
+export function balance({
     address,
     tag='latest',
     url

@@ -1,7 +1,7 @@
 import { q } from '../schemas/mod.ts'
 import { ejraCall } from '../lib/mod.ts'
 
-export default function height({
+export function height({
     url
 }:{
     url?:string
