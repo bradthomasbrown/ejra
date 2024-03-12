@@ -16,7 +16,7 @@ const schema = q
 /** @overload */
 export function height(options:HeightOptions&{ url:string }):Promise<z.infer<typeof schema>>
 /** @overload */
-export function height(options:HeightOptions):{
+export function height(options?:HeightOptions):{
     method:typeof method
     schema:typeof schema
 }

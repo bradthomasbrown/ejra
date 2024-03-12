@@ -16,7 +16,7 @@ const schema = q
 /** @overload */
 export function chainId(options:ChainIDOptions&{ url:string }):Promise<z.infer<typeof schema>>
 /** @overload */
-export function chainId(options:ChainIDOptions):{
+export function chainId(options?:ChainIDOptions):{
     method:typeof method
     schema:typeof schema
 }

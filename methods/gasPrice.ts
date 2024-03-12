@@ -16,7 +16,7 @@ const schema = q
 /** @overload */
 export function gasPrice(options:GasPriceOptions&{ url:string }):Promise<z.infer<typeof schema>>
 /** @overload */
-export function gasPrice(options:GasPriceOptions):{
+export function gasPrice(options?:GasPriceOptions):{
     method:typeof method
     schema:typeof schema
 }
