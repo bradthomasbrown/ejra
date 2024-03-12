@@ -1,5 +1,5 @@
 import * as m from '../methods/mod.ts'
 
-export function height() {
+export function gasPrice() {
     return { ...m.gasPrice }
 }
