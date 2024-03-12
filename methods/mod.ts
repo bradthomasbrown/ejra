@@ -8,3 +8,6 @@
 export * from './balance.ts'
 export * from './height.ts'
 export * from './logs.ts'
+export * from './tx.ts'
+export * from './chainId.ts'
+export * from './gasPrice.ts'
