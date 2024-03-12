@@ -17,7 +17,7 @@ export const logs = Object.assign(
     (options:Options) => {
         const { filter } = options
         request.params = [filter] as const
-        l.call({ ...options, request })
+        return l.call({ ...options, request })
     },
     { method, schema }
 )

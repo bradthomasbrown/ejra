@@ -16,7 +16,7 @@ export const sendRawTx = Object.assign(
     (options:Options) => {
         const { data } = options
         request.params = [data] as const
-        l.call({ ...options, request })
+        return l.call({ ...options, request })
     },
     { method, schema }
 )

@@ -16,7 +16,7 @@ export const receipt = Object.assign(
     (options:Options) => {
         const { hash } = options
         request.params = [hash] as const
-        l.call({ ...options, request })
+        return l.call({ ...options, request })
     },
     { method, schema }
 )
