@@ -6,3 +6,4 @@
 export * from './q.ts'
 export * from './log.ts'
 export * from './tx.ts'
+export * from './receipt.ts'
