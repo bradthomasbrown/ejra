@@ -16,7 +16,7 @@ export async function batch<
 }:{
     requests:E
     url:string
-    rlb:RLB
+    rlb?:RLB
 }) {
 
     // build init
