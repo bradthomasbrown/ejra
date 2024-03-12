@@ -16,8 +16,8 @@ export type TxOptions = {
 const method = 'eth_getTransactionByHash' as const
 const schema = schemas.tx
 
-export function tx(options:TxOptions&{ url:string }):Promise<z.infer<typeof schema>>
-export function tx<
+export function txByHash(options:TxOptions&{ url:string }):Promise<z.infer<typeof schema>>
+export function txByHash<
     H extends string,
     P extends [H]
 >(options:{
@@ -28,7 +28,7 @@ export function tx<
     params:P
     schema:typeof schema
 }
-export function tx<
+export function txByHash<
     H extends string
 >(options:{
     hash:H
