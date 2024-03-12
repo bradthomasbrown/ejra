@@ -2,6 +2,7 @@ import z from 'https://deno.land/x/zod@v3.22.4/index.ts'
 import { TxCallObject, Tag } from '../types/mod.ts'
 import { RLB } from 'https://deno.land/x/rlb@0.0.8/RLB.ts';
 import * as lib from '../lib/mod.ts'
+import { q } from '../schemas/mod.ts'
 
 /**
  * @type
@@ -13,7 +14,7 @@ export type EstimateGasOptions = {
     rlb?:RLB
 }
 const method = 'eth_estimateGas' as const
-const schema = z.string()
+const schema = q
 
 /** @overload */
 export function estimateGas(options:EstimateGasOptions&{ url:string }):Promise<z.infer<typeof schema>>

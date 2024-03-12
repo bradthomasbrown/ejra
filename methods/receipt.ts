@@ -14,7 +14,7 @@ export type ReceiptOptions = {
     rlb?:RLB
 }
 const method = 'eth_getTransactionReceipt' as const
-const schema = schemas.tx
+const schema = schemas.receipt
 
 export function receipt(options:ReceiptOptions&{ url:string }):Promise<z.infer<typeof schema>>
 export function receipt<
