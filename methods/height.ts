@@ -1,7 +1,7 @@
 import z from 'https://deno.land/x/zod@v3.22.4/index.ts'
 import { q } from '../schemas/mod.ts'
 import { call } from '../lib/mod.ts'
-import { RLB } from 'https://deno.land/x/rlb@0.0.7/RLB.ts';
+import { RLB } from 'https://deno.land/x/rlb@0.0.8/RLB.ts';
 
 /**
  * @type
