@@ -4,7 +4,7 @@ type Options = {
     data:string
 }
 
-export function balance(options:Options) {
+export function sendRawTx(options:Options) {
     const { data } = options
     const params = [data] as const
     return { ...m.sendRawTx, params }
