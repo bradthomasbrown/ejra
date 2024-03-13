@@ -1,4 +1,4 @@
-import { Tag } from '../../types/mod.ts'
+import { Tag } from '../types/mod.ts'
 import * as m from '../methods/mod.ts'
 
 type Options = {

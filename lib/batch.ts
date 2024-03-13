@@ -1,5 +1,5 @@
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
-import { RLB } from '../../../rlb/mod.ts'
+import { RLB } from 'https://deno.land/x/rlb@0.0.9/mod.ts'
 
 export async function batch<
     E extends readonly {
