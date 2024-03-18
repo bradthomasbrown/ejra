@@ -1,4 +1,4 @@
-import * as methods from '../methods/mod.ts'
+import * as methods from '../method/mod.ts'
 
 type Slice<T> = T extends [url:string, ...params: infer P] ? P : never
 

@@ -1,4 +1,4 @@
-import * as schemas from '../schemas/mod.ts'
+import * as schemas from '../schema/mod.ts'
 import { call as c } from '../lib/mod.ts'
 import { Tag, TxCallObject, Filter } from '../types/mod.ts'
 
