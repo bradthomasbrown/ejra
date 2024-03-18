@@ -1,5 +1,4 @@
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
-import { RLB } from 'https://deno.land/x/rlb@0.0.9/mod.ts'
 
 export async function batch<
     E extends readonly {
@@ -9,15 +8,7 @@ export async function batch<
     }[],
     P extends readonly unknown[],
     S extends z.ZodTypeAny
->({
-    requests,
-    url,
-    rlb
-}:{
-    requests:E
-    url:string
-    rlb?:RLB
-}) {
+>(url:string, requests:E) {
 
     // build init
     const jrrqs = requests.map(({ method, params }, i) =>
@@ -27,15 +18,14 @@ export async function batch<
     const init = { body, headers, method: 'POST' } as const
 
     // get response
-    const response = rlb
-        ? await rlb.regulate({ fn: fetch, args: [url, init] as const })
-        : await fetch(url, init)
+    const response = await fetch(url, init)
 
     // turn response into json
     const json = await response.json()
 
     // extract results and errors from json
-    const jrrss = await z.object({ result: z.unknown(), id: z.number() }).array().length(requests.length).parseAsync(json)
+    const jrrss = z.object({ result: z.unknown(), id: z.number() })
+        .array().length(requests.length).parse(json)
 
     // parse the results with the given schemas
     return Promise.all(requests.map(({ schema }, i) => schema.parseAsync(jrrss.find(({ id }) => i == id)?.result))) as {

@@ -3,7 +3,8 @@
  * @module
  */
 
-export * from './q.ts'
+export * from './quantity.ts'
 export * from './log.ts'
-export * from './tx.ts'
 export * from './receipt.ts'
+export * from './string.ts'
+export * from './tx.ts'

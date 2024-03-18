@@ -1,16 +1,16 @@
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
-import { q, log } from './mod.ts'
+import { quantity, log } from './mod.ts'
 
 export const receipt = z.object({
     transactionHash: z.string(),
-    transactionIndex: q,
+    transactionIndex: quantity,
     blockHash: z.string(),
-    blockNumber: q,
+    blockNumber: quantity,
     from: z.string(),
     to: z.string().nullable(),
-    cumulativeGasUsed: q,
-    effectiveGasPrice: q,
-    gasUsed: q,
+    cumulativeGasUsed: quantity,
+    effectiveGasPrice: quantity,
+    gasUsed: quantity,
     contractAddress: z.string().nullable(),
     logs: log.array(),
     logsBloom: z.string(),
