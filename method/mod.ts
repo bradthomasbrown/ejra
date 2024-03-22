@@ -1,94 +1,59 @@
-import * as schemas from '../schema/mod.ts'
-import { call as c } from '../lib/mod.ts'
-import { Tag, TxCallObject, Filter } from '../types/mod.ts'
+import { call as c, Ejra } from '../lib/mod.ts'
+import { Params as P } from '../type/mod.ts'
+import * as r from '../request/mod.ts'
 
-export const clientVersion = (() => { const request = {
-    method: 'web3_clientVersion', 
-    schema: schemas.string } as const; return Object.assign((url:string, ...
-    params: []) => c(url, { ...request, params }), { request })}
-)()
+export function clientVersion(this:Ejra, ...params:P['clientVersion']) {
+    return c.bind(this)({ ...r.clientVersion, params })
+}
 
-export const sha3 = (() => { const request = {
-    method: 'web3_sha3', 
-    schema: schemas.string } as const; return Object.assign((url:string, ...
-    params: [data:string]) => c(url, { ...request, params }), { request })}
-)()
+export function sha3(this:Ejra, ...params:P['sha3']) {
+    return c.bind(this)({ ...r.sha3, params })
+}
 
-export const chainId = (() => { const request = {
-    method: 'eth_chainId', 
-    schema: schemas.quantity } as const; return Object.assign((url:string, ...
-    params: []) => c(url, { ...request, params }), { request })}
-)()
+export function chainId(this:Ejra, ...params:P['chainId']) {
+    return c.bind(this)({ ...r.chainId, params })
+}
 
-export const gasPrice = (() => { const request = {
-    method: 'eth_gasPrice', 
-    schema: schemas.quantity } as const; return Object.assign((url:string, ...
-    params: []) => c(url, { ...request, params }), { request })}
-)()
+export function gasPrice(this:Ejra, ...params:P['gasPrice']) {
+    return c.bind(this)({ ...r.gasPrice, params })
+}
 
-export const height = (() => { const request = {
-    method: 'eth_blockNumber', 
-    schema: schemas.quantity } as const; return Object.assign((url:string, ...
-    params: []) => c(url, { ...request, params }), { request })}
-)()
+export function height(this:Ejra, ...params:P['height']) {
+    return c.bind(this)({ ...r.height, params })
+}
 
-export const balance = (() => { const request = {
-    method: 'eth_getBalance', 
-    schema: schemas.quantity } as const; return Object.assign((url:string, ...
-    params: [address:string]) => c(url, { ...request, params }), { request })}
-)()
+export function balance(this:Ejra, ...params:P['balance']) {
+    return c.bind(this)({ ...r.balance, params })
+}
 
-export const slot = (() => { const request = {
-    method: 'eth_getStorageAt', 
-    schema: schemas.string } as const; return Object.assign((url:string, ...
-    params: [address:string, slot:bigint, tag:Tag]) => c(url, { ...request, params }), { request })}
-)()
+export function slot(this:Ejra, ...params:P['slot']) {
+    return c.bind(this)({ ...r.slot, params })
+}
 
-export const nonce = (() => { const request = {
-    method: 'eth_getTransactionCount', 
-    schema: schemas.quantity } as const; return Object.assign((url:string, ...
-    params: [address:string, tag:Tag]) => c(url, { ...request, params }), { request })}
-)()
+export function nonce(this:Ejra, ...params:P['nonce']) {
+    return c.bind(this)({ ...r.nonce, params })
+}
 
-export const code = (() => { const request = {
-    method: 'eth_getCode', 
-    schema: schemas.string } as const; return Object.assign((url:string, ...
-    params: [address:string, tag:Tag]) => c(url, { ...request, params }), { request })}
-)()
+export function code(this:Ejra, ...params:P['code']) {
+    return c.bind(this)({ ...r.code, params })
+}
 
-export const send = (() => { const request = {
-    method: 'eth_sendRawTransaction', 
-    schema: schemas.string } as const; return Object.assign((url:string, ...
-    params: [data:string]) => c(url, { ...request, params }), { request })}
-)()
+export function send(this:Ejra, ...params:P['send']) {
+    return c.bind(this)({ ...r.send, params })
+}
 
-export const call = (() => { const request = {
-    method: 'eth_call', 
-    schema: schemas.string } as const; return Object.assign((url:string, ...
-    params: [txCallObject:TxCallObject]) => c(url, { ...request, params }), { request })}
-)()
+export function call(this:Ejra, ...params:P['call']) {
+    return c.bind(this)({ ...r.call, params })
+}
 
-export const estimateGas = (() => { const request = {
-    method: 'eth_estimateGas', 
-    schema: schemas.quantity } as const; return Object.assign((url:string, ...
-    params: [txCallObject:Partial<TxCallObject>]) => c(url, { ...request, params }), { request })}
-)()
+export function estimateGas(this:Ejra, ...params:P['estimateGas']) {
+    return c.bind(this)({ ...r.estimateGas, params })
+}
 
-export const receipt = (() => { const request = {
-    method: 'eth_getTransactionReceipt', 
-    schema: schemas.receipt } as const; return Object.assign((url:string, ...
-    params: [hash:string]) => c(url, { ...request, params }), { request })}
-)()
+export function receipt(this:Ejra, ...params:P['receipt']) {
+    return c.bind(this)({ ...r.receipt, params })
+}
 
-export const logs = (() => { const request = {
-    method: 'eth_getLogs', 
-    schema: schemas.log.array() } as const; return Object.assign((url:string, ...
-    params: [filter:Filter]) => c(url, { ...request, params }), { request })}
-)()
-
-// unfinished
-// export const trace = (() => { const request = {
-//     method: 'debug_traceTransaction', 
-//     schema: schemas.log.array() } as const; return Object.assign((url:string, ...params:
-//     [filter:Filter]) => c(url, { ...request, params }), { request })}
-// )()
+export function logs(this:Ejra, chainId:bigint, ...params:P['logs']) {
+   const foo = c.bind<typeof c>(this)(1n, { ...r.logs, params })
+}
