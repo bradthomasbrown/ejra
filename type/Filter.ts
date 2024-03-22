@@ -4,5 +4,5 @@ export type Filter = {
     fromBlock:Tag
     toBlock:Tag
     address?:string
-    topics?:[string, ...string[]]
+    topics?:(string|string[])[]
 }
