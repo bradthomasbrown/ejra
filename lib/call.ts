@@ -1,7 +1,7 @@
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
 import { Lazy } from 'https://deno.land/x/lazy_promise@0.0.1/mod.ts'
 import { Snail } from 'https://deno.land/x/snail@0.0.0/mod.ts'
-import * as schema from '../schema/mod.ts'
+import * as schema from '../schemas/mod.ts'
 import { Ejra } from './mod.ts'
 
 const replacer = (_:unknown,v:unknown)=>typeof v=='bigint'?''+v:v

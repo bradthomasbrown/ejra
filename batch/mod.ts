@@ -1,5 +1,5 @@
 import { Ejra } from '../lib/mod.ts'
-import { Params as P } from '../type/mod.ts'
+import { Params as P } from '../types/mod.ts'
 import * as r from '../request/mod.ts'
 
 type Slice<T> = T extends [url:string, ...params: infer P] ? P : never

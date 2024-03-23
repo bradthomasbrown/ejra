@@ -1,4 +1,4 @@
-import * as schema from '../schema/mod.ts'
+import * as schema from '../schemas/mod.ts'
 
 export const clientVersion = { method: 'web3_clientVersion', schema: schema.string }
 export const sha3 = { method: 'web3_sha3', schema: schema.string }
