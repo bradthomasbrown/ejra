@@ -1,12 +1,12 @@
 import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
-import { AIQ } from 'https://deno.land/x/aiq@0.0.0/mod.ts'
-import { Lazy } from 'https://deno.land/x/lazy_promise@0.0.1/mod.ts'
-import { Snail } from 'https://deno.land/x/snail@0.0.0/mod.ts'
-import { Toad } from '../../../llc/toad/mod.ts'
-import { KvCache } from '../../kvcache/mod.ts'
-import { KvVertigo } from '../../kv_vertigo/mod.ts'
-import { Params as P } from '../type/mod.ts'
-import * as schema from '../schema/mod.ts'
+import { AIQ } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/aiq@0.0.0/mod.ts'
+import { Lazy } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/lazy@0.0.0/mod.ts'
+import { Snail } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/snail@0.0.0/mod.ts'
+import { Toad } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/toad@0.0.6-vertigo/mod.ts'
+import { KvCache } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/kvcache@0.0.2-vertigo/mod.ts'
+import { KvVertigo } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/kvvertigo@0.0.2/mod.ts'
+import { Params as P } from '../types/mod.ts'
+import * as schemas from '../schemas/mod.ts'
 import * as r from '../request/mod.ts'
 
 const replacer = (_:unknown,v:unknown)=>typeof v=='bigint'?''+v:v
@@ -81,7 +81,7 @@ export class Ejra {
                 })
 
             let response
-            try { response = schema.response.parse(JSON.parse(text)) }
+            try { response = schemas.response.parse(JSON.parse(text)) }
             catch(reason) {
                 const error = new Error(reason)
                 error.stack += stacky.stack??''
@@ -103,7 +103,7 @@ export class Ejra {
                 const error = new Error(reason)
                 error.stack += stacky.stack??''
                 error.message = 'json response result does not fit provided schema'
-                error.cause = JSON.stringify({ response, schema }, replacer)
+                error.cause = JSON.stringify({ response, schemas }, replacer)
                 throw error
             }
 
