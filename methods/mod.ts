@@ -65,7 +65,7 @@ export const send = (() => { const request = {
 export const call = (() => { const request = {
     method: 'eth_call', 
     schema: schemas.string } as const; return Object.assign((url:string, ...
-    params: [txCallObject:TxCallObject]) => c(url, { ...request, params }), { request })}
+    params: [txCallObject:TxCallObject, tag:Tag]) => c(url, { ...request, params }), { request })}
 )()
 
 export const estimateGas = (() => { const request = {

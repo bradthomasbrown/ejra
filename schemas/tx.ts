@@ -11,7 +11,7 @@ export const tx = z.object({
     input: z.string(),
     nonce: quantity,
     to: z.string().nullable(),
-    transactionIndex: quantity,
+    transactionIndex: quantity.nullable(),
     value: quantity,
     v: quantity,
     r: quantity,
