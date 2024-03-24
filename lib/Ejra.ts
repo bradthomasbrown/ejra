@@ -2,9 +2,7 @@ import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
 import { AIQ } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/aiq@0.0.0/mod.ts'
 import { Lazy } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/lazy@0.0.0/mod.ts'
 import { Snail } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/snail@0.0.0/mod.ts'
-import { Toad } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/toad@0.0.6-vertigo/mod.ts'
-import { KvCache } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/kvcache@0.0.2-vertigo/mod.ts'
-import { KvVertigo } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/kvvertigo@0.0.2/mod.ts'
+import { Toad } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/toad@0.0.3/mod.ts'
 import { Params as P } from '../types/mod.ts'
 import * as schemas from '../schemas/mod.ts'
 import * as r from '../request/mod.ts'
@@ -15,36 +13,32 @@ export class Ejra {
     
     out:AIQ<string>
     err:AIQ<Error>
-    kv:KvVertigo
     toad:Toad
-    urls:Map<bigint,KvCache<string>>
 
-    constructor(kv:KvVertigo, toad:Toad) {
+    constructor(toad:Toad) {
         
         this.out = new AIQ<string>()
         this.err = new AIQ<Error>()
-        this.kv = kv
         this.toad = toad
-        this.urls = new Map()
 
     }
 
-    clientVersion(this:Ejra, id:bigint, ...p:P['clientVersion']) { const request = r.clientVersion; return this.#call(id, { ...request, params: p }) }
-    sha3(this:Ejra, id:bigint, ...p:P['sha3']) { const request = r.sha3; return this.#call(id, { ...request, params: p }) }
-    chainId(this:Ejra, id:bigint, ...p:P['chainId']) { const request = r.chainId; return this.#call(id, { ...request, params: p }) }
-    gasPrice(this:Ejra, id:bigint, ...p:P['gasPrice']) { const request = r.gasPrice; return this.#call(id, { ...request, params: p }) }
-    height(this:Ejra, id:bigint, ...p:P['height']) { const request = r.height; return this.#call(id, { ...request, params: p }) }
-    balance(this:Ejra, id:bigint, ...p:P['balance']) { const request = r.balance; return this.#call(id, { ...request, params: p }) }
-    slot(this:Ejra, id:bigint, ...p:P['slot']) { const request = r.slot; return this.#call(id, { ...request, params: p }) }
-    nonce(this:Ejra, id:bigint, ...p:P['nonce']) { const request = r.nonce; return this.#call(id, { ...request, params: p }) }
-    code(this:Ejra, id:bigint, ...p:P['code']) { const request = r.code; return this.#call(id, { ...request, params: p }) }
-    send(this:Ejra, id:bigint, ...p:P['send']) { const request = r.send; return this.#call(id, { ...request, params: p }) }
-    call(this:Ejra, id:bigint, ...p:P['call']) { const request = r.call; return this.#call(id, { ...request, params: p }) }
-    estimateGas(this:Ejra, id:bigint, ...p:P['estimateGas']) { const request = r.estimateGas; return this.#call(id, { ...request, params: p }) }
-    receipt(this:Ejra, id:bigint, ...p:P['receipt']) { const request = r.receipt; return this.#call(id, { ...request, params: p }) }
-    logs(this:Ejra, id:bigint, ...p:P['logs']) { const request = r.logs; return this.#call(id, { ...request, params: p }) }
+    clientVersion(this:Ejra, url:string, ...p:P['clientVersion']) { const request = r.clientVersion; return this.#call(url, { ...request, params: p }) }
+    sha3(this:Ejra, url:string, ...p:P['sha3']) { const request = r.sha3; return this.#call(url, { ...request, params: p }) }
+    chainId(this:Ejra, url:string, ...p:P['chainId']) { const request = r.chainId; return this.#call(url, { ...request, params: p }) }
+    gasPrice(this:Ejra, url:string, ...p:P['gasPrice']) { const request = r.gasPrice; return this.#call(url, { ...request, params: p }) }
+    height(this:Ejra, url:string, ...p:P['height']) { const request = r.height; return this.#call(url, { ...request, params: p }) }
+    balance(this:Ejra, url:string, ...p:P['balance']) { const request = r.balance; return this.#call(url, { ...request, params: p }) }
+    slot(this:Ejra, url:string, ...p:P['slot']) { const request = r.slot; return this.#call(url, { ...request, params: p }) }
+    nonce(this:Ejra, url:string, ...p:P['nonce']) { const request = r.nonce; return this.#call(url, { ...request, params: p }) }
+    code(this:Ejra, url:string, ...p:P['code']) { const request = r.code; return this.#call(url, { ...request, params: p }) }
+    send(this:Ejra, url:string, ...p:P['send']) { const request = r.send; return this.#call(url, { ...request, params: p }) }
+    call(this:Ejra, url:string, ...p:P['call']) { const request = r.call; return this.#call(url, { ...request, params: p }) }
+    estimateGas(this:Ejra, url:string, ...p:P['estimateGas']) { const request = r.estimateGas; return this.#call(url, { ...request, params: p }) }
+    receipt(this:Ejra, url:string, ...p:P['receipt']) { const request = r.receipt; return this.#call(url, { ...request, params: p }) }
+    logs(this:Ejra, url:string, ...p:P['logs']) { const request = r.logs; return this.#call(url, { ...request, params: p }) }
 
-    async #call<
+    async#call<
         E extends {
             method:string,
             params:P,
@@ -52,7 +46,7 @@ export class Ejra {
         },
         P extends readonly unknown[],
         S extends z.ZodTypeAny
-    >(this:Ejra, chainId:bigint, request:E):Promise<Error|z.infer<E['schema']>> {
+    >(this:Ejra, url:string, request:E):Promise<Error|z.infer<E['schema']>> {
 
         // use this to "preserve" stack
         const stacky = new Error()
@@ -62,12 +56,6 @@ export class Ejra {
         const body = JSON.stringify(jrrq, (_,v)=>typeof v=='bigint'?`0x${v.toString(16)}`:v)
         const headers = { 'Content-Type': 'application/json' } as const
         const init = { body, headers, method: 'POST' } as const
-        
-        const url = await this.urls.get(chainId)?.get()
-        if (url === undefined) {
-            this.err.push(new Error(`ejra.call failed, no url for chainId ${chainId}`))
-            return stacky 
-        }
 
         // construct lazy
         const lazy:Lazy<z.infer<E['schema']>> = async () => {
@@ -123,7 +111,7 @@ export class Ejra {
                 this.err.push(error)
                 return error
             })
-        return this.toad.feed(snail).catch(reason => new Error(reason))
+        return await this.toad.feed(snail).catch(reason => new Error(reason))
 
     }
 
