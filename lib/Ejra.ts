@@ -112,13 +112,13 @@ export class Ejra {
         // 🐌
         const snail = new Snail(lazy)
         snail.born
-            .then(() => this.out.push(`ejra.call sending request to ${url} ${JSON.stringify(request, replacer)}`))
+            .then(() => this.out.push(`ejra.call sending request to ${url} ${JSON.stringify(body, replacer)}`))
         snail.died
-            .then(value => this.out.push(`ejra.call received value from ${url} ${JSON.stringify(value, replacer)} for request ${JSON.stringify(request, replacer)}`))
+            .then(value => this.out.push(`ejra.call received value from ${url} ${JSON.stringify(value, replacer)} for request ${JSON.stringify(body, replacer)}`))
             .catch(reason => {
                 const error = new Error(reason)
                 error.stack += stacky.stack??''
-                error.message = `ejra.call failed requesting from ${url} ${JSON.stringify(request, replacer)}`
+                error.message = `ejra.call failed requesting from ${url} ${JSON.stringify(body, replacer)}`
                 error.cause = reason?.cause
                 this.err.push(error)
                 return error
