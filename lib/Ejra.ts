@@ -58,7 +58,8 @@ export class Ejra {
         const stacky = new Error()
 
         // build init
-        const jrrq = { ...request, jsonrpc: '2.0', id: 0 } as const
+        const { method, params } = request
+        const jrrq = { ...{ method, params }, jsonrpc: '2.0', id: 0 } as const
         const body = JSON.stringify(jrrq, (_,v)=>typeof v=='bigint'?`0x${v.toString(16)}`:v)
         const headers = { 'Content-Type': 'application/json' } as const
         const init = { body, headers, method: 'POST' } as const
