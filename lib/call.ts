@@ -14,7 +14,7 @@ export async function call<
     },
     P extends readonly unknown[],
     S extends z.ZodTypeAny
->(this:Ejra, chainId:bigint, request:E):Promise<z.infer<E['schema']>> {
+>(this:Ejra, chainId:number, request:E):Promise<z.infer<E['schema']>> {
 
     // use this to "preserve" stack
     const stacky = new Error()

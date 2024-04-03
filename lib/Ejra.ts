@@ -17,7 +17,7 @@ export class Ejra {
     err:AIQ<Error>
     kv:KvVertigo
     toad:Toad
-    urls:Map<bigint,KvCache<string>>
+    urls:Map<number,KvCache<string>>
 
     constructor(kv:KvVertigo, toad:Toad) {
         
@@ -29,20 +29,20 @@ export class Ejra {
 
     }
 
-    clientVersion(this:Ejra, id:bigint, ...p:P['clientVersion']) { const request = r.clientVersion; return this.#call(id, { ...request, params: p }) }
-    sha3(this:Ejra, id:bigint, ...p:P['sha3']) { const request = r.sha3; return this.#call(id, { ...request, params: p }) }
-    chainId(this:Ejra, id:bigint, ...p:P['chainId']) { const request = r.chainId; return this.#call(id, { ...request, params: p }) }
-    gasPrice(this:Ejra, id:bigint, ...p:P['gasPrice']) { const request = r.gasPrice; return this.#call(id, { ...request, params: p }) }
-    height(this:Ejra, id:bigint, ...p:P['height']) { const request = r.height; return this.#call(id, { ...request, params: p }) }
-    balance(this:Ejra, id:bigint, ...p:P['balance']) { const request = r.balance; return this.#call(id, { ...request, params: p }) }
-    slot(this:Ejra, id:bigint, ...p:P['slot']) { const request = r.slot; return this.#call(id, { ...request, params: p }) }
-    nonce(this:Ejra, id:bigint, ...p:P['nonce']) { const request = r.nonce; return this.#call(id, { ...request, params: p }) }
-    code(this:Ejra, id:bigint, ...p:P['code']) { const request = r.code; return this.#call(id, { ...request, params: p }) }
-    send(this:Ejra, id:bigint, ...p:P['send']) { const request = r.send; return this.#call(id, { ...request, params: p }) }
-    call(this:Ejra, id:bigint, ...p:P['call']) { const request = r.call; return this.#call(id, { ...request, params: p }) }
-    estimateGas(this:Ejra, id:bigint, ...p:P['estimateGas']) { const request = r.estimateGas; return this.#call(id, { ...request, params: p }) }
-    receipt(this:Ejra, id:bigint, ...p:P['receipt']) { const request = r.receipt; return this.#call(id, { ...request, params: p }) }
-    logs(this:Ejra, id:bigint, ...p:P['logs']) { const request = r.logs; return this.#call(id, { ...request, params: p }) }
+    clientVersion(this:Ejra, id:number, ...p:P['clientVersion']) { const request = r.clientVersion; return this.#call(id, { ...request, params: p }) }
+    sha3(this:Ejra, id:number, ...p:P['sha3']) { const request = r.sha3; return this.#call(id, { ...request, params: p }) }
+    chainId(this:Ejra, id:number, ...p:P['chainId']) { const request = r.chainId; return this.#call(id, { ...request, params: p }) }
+    gasPrice(this:Ejra, id:number, ...p:P['gasPrice']) { const request = r.gasPrice; return this.#call(id, { ...request, params: p }) }
+    height(this:Ejra, id:number, ...p:P['height']) { const request = r.height; return this.#call(id, { ...request, params: p }) }
+    balance(this:Ejra, id:number, ...p:P['balance']) { const request = r.balance; return this.#call(id, { ...request, params: p }) }
+    slot(this:Ejra, id:number, ...p:P['slot']) { const request = r.slot; return this.#call(id, { ...request, params: p }) }
+    nonce(this:Ejra, id:number, ...p:P['nonce']) { const request = r.nonce; return this.#call(id, { ...request, params: p }) }
+    code(this:Ejra, id:number, ...p:P['code']) { const request = r.code; return this.#call(id, { ...request, params: p }) }
+    send(this:Ejra, id:number, ...p:P['send']) { const request = r.send; return this.#call(id, { ...request, params: p }) }
+    call(this:Ejra, id:number, ...p:P['call']) { const request = r.call; return this.#call(id, { ...request, params: p }) }
+    estimateGas(this:Ejra, id:number, ...p:P['estimateGas']) { const request = r.estimateGas; return this.#call(id, { ...request, params: p }) }
+    receipt(this:Ejra, id:number, ...p:P['receipt']) { const request = r.receipt; return this.#call(id, { ...request, params: p }) }
+    logs(this:Ejra, id:number, ...p:P['logs']) { const request = r.logs; return this.#call(id, { ...request, params: p }) }
 
     async #call<
         E extends {
@@ -52,7 +52,7 @@ export class Ejra {
         },
         P extends readonly unknown[],
         S extends z.ZodTypeAny
-    >(this:Ejra, chainId:bigint, request:E):Promise<Error|z.infer<E['schema']>> {
+    >(this:Ejra, chainId:number, request:E):Promise<Error|z.infer<E['schema']>> {
 
         // use this to "preserve" stack
         const stacky = new Error()
