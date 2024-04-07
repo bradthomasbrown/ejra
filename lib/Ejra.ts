@@ -38,7 +38,7 @@ export class Ejra {
     receipt(this:Ejra, url:string, ...p:P['receipt']) { const request = r.receipt; return this.#call(url, { ...request, params: p }) }
     logs(this:Ejra, url:string, ...p:P['logs']) { const request = r.logs; return this.#call(url, { ...request, params: p }) }
 
-    async#call<
+    async #call<
         E extends {
             method:string,
             params:P,
@@ -119,7 +119,12 @@ export class Ejra {
                 this.err.push(error)
                 return error
             })
-        return await this.toad.feed(snail).catch(reason => new Error(reason))
+        return await this.toad.feed(snail).catch(reason => {
+            const error = new Error(reason)
+            error.stack += stacky.stack??''
+            error.message = reason?.message ?? 'unknown error'
+            error.cause = reason?.cause
+        })
 
     }
 
