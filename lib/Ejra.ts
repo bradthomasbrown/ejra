@@ -3,7 +3,7 @@ import { AIQ } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/aiq@0.0.2/mod.ts'
 import { Lazy } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/lazy@0.0.0/mod.ts'
 import { Snail } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/snail@0.0.3/mod.ts'
 import { Toad } from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/toad@0.0.10/mod.ts'
-import { Params as P } from '../types/mod.ts'
+import { Params as P, Options } from '../types/mod.ts'
 import * as schemas from '../schemas/mod.ts'
 import * as r from '../request/mod.ts'
 
@@ -44,9 +44,17 @@ export class Ejra {
             params:P,
             schema:S
         },
-        P extends readonly unknown[],
+        P extends unknown[],
         S extends z.ZodTypeAny
     >(this:Ejra, url:string, request:E):Promise<Error|z.infer<E['schema']>> {
+
+        // get options from params destructively
+        let signal:undefined|AbortSignal = undefined
+        const maybeOptions = request.params.at(-1)
+        if (maybeOptions instanceof Options) {
+            signal = maybeOptions.signal
+            request.params.pop()
+        }
 
         // use this to "preserve" stack
         const stacky = new Error()
@@ -55,7 +63,7 @@ export class Ejra {
         const jrrq = { ...request, jsonrpc: '2.0', id: 0 } as const
         const body = JSON.stringify(jrrq, (_,v)=>typeof v=='bigint'?`0x${v.toString(16)}`:v)
         const headers = { 'Content-Type': 'application/json' } as const
-        const init = { body, headers, method: 'POST' } as const
+        const init = { body, headers, method: 'POST', signal } as const satisfies RequestInit
 
         // construct lazy
         const lazy:Lazy<z.infer<E['schema']>> = async () => {
