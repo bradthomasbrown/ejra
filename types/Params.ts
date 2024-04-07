@@ -1,18 +1,25 @@
 import { Filter, Tag, TxCallObject } from './mod.ts'
 
+export class Options {
+    signal?:AbortSignal 
+    constructor({ signal }:{ signal?:AbortSignal }={}) {
+        this.signal = signal
+    }
+}
+
 export type Params = {
-    clientVersion: [options?:{ signal:AbortSignal }],
-    sha3: [data:string, options?:{ signal:AbortSignal }],
-    chainId: [options?:{ signal:AbortSignal }],
-    gasPrice: [options?:{ signal:AbortSignal }],
-    height: [options?:{ signal:AbortSignal }],
-    balance: [address:string, tag:Tag, options?:{ signal:AbortSignal }],
-    slot: [address:string, slot:bigint, tag:Tag, options?:{ signal:AbortSignal }],
-    nonce: [address:string, tag:Tag, options?:{ signal:AbortSignal }],
-    code: [address:string, tag:Tag, options?:{ signal:AbortSignal }],
-    send: [data:string, options?:{ signal:AbortSignal }],
-    call: [txCallObject:TxCallObject, tag:Tag, options?:{ signal:AbortSignal }]
-    estimateGas: [txCallObject:Partial<TxCallObject>, options?:{ signal:AbortSignal }],
-    receipt: [hash:string, options?:{ signal:AbortSignal }]
-    logs: [filter:Filter, options?:{ signal:AbortSignal }]
+    clientVersion: [options?:Options],
+    sha3: [data:string, options?:Options],
+    chainId: [options?:Options],
+    gasPrice: [options?:Options],
+    height: [options?:Options],
+    balance: [address:string, tag:Tag, options?:Options],
+    slot: [address:string, slot:bigint, tag:Tag, options?:Options],
+    nonce: [address:string, tag:Tag, options?:Options],
+    code: [address:string, tag:Tag, options?:Options],
+    send: [data:string, options?:Options],
+    call: [txCallObject:TxCallObject, tag:Tag, options?:Options]
+    estimateGas: [txCallObject:Partial<TxCallObject>, options?:Options],
+    receipt: [hash:string, options?:Options]
+    logs: [filter:Filter, options?:Options]
 }
