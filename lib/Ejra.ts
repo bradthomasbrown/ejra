@@ -107,7 +107,7 @@ export class Ejra {
         }
 
         // 🐌
-        const snail = new Snail({ lazy })
+        const snail = new Snail({ lazy, signal })
         snail.born
             .then(() => this.out.push(`ejra.call sending request to ${url} ${JSON.stringify(request, replacer)}`))
         snail.died
