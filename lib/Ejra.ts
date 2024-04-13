@@ -125,6 +125,7 @@ export class Ejra {
             error.stack += stacky.stack??''
             error.message = reason?.message ?? 'unknown error'
             error.cause = reason?.cause
+            return error
         })
 
     }
