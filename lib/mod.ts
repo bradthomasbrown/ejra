@@ -1,7 +1,2 @@
-/**
- * library methods for ejra, such as call and batch
- * @module
- */
-
-export * from './call.ts'
-export * from './batch.ts'
+export * from "lib/call.ts";
+export * as methods from "methods/mod.ts";

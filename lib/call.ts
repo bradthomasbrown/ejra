@@ -1,34 +1,23 @@
-import { z } from 'https://deno.land/x/zod@v3.22.4/mod.ts'
+import { z } from "zod";
+import * as jra from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/jra@0.0.6/mod.ts'
 
-export async function call<
-    E extends {
-        method:string,
-        params:P,
-        schema:S
-    },
-    P extends readonly unknown[],
-    S extends z.ZodTypeAny
->(url:string, request:E):Promise<z.infer<E['schema']>> {
+const replacer = (_k: unknown, v: unknown) =>
+  typeof v == "bigint" ? `0x${v.toString(16)}` : v;
 
-    // build init
-    const jrrq = { ...request, jsonrpc: '2.0', id: 0 } as const
-    const body = JSON.stringify(jrrq, (_,v)=>typeof v=='bigint'?`0x${v.toString(16)}`:v)
-    const headers = { 'Content-Type': 'application/json' } as const
-    const init = { body, headers, method: 'POST' } as const
-
-    // get response
-    const response = await fetch(url, init)
-
-    // turn response into json
-    const json = await response.json()
-
-    // extract result and error from json
-    const { result } = z.object({
-        result: z.unknown(),
-        // error: z.object({ message: z.string() }).optional()
-    }).parse(json)
-
-    // parse the result with the given schema
-    return request.schema.parse(result)
-
+export async function call<S extends z.ZodTypeAny>(
+  rpc: string,
+  method: string,
+  params: readonly unknown[],
+  schema: S,
+) {
+  const jrrq = { method, params, jsonrpc: "2.0", id: 0 };
+  const body = JSON.stringify(jrrq, replacer) satisfies BodyInit;
+  const headers = { "Content-Type": "application/json" } satisfies HeadersInit;
+  const init = { body, headers, method: "POST" } satisfies RequestInit;
+  const fetchResponse = await fetch(rpc, init);
+  const text = await fetchResponse.text();
+  const json = await JSON.parse(text);
+  const jraResponse = jra.schema.response.parse(json)
+  const { result } = jraResponse
+  return schema.parse(result) as z.infer<S>;
 }
