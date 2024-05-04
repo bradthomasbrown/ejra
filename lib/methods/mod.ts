@@ -1,1 +1,1 @@
-export * from "lib/methods/clientVersion.ts";
+export * from "methods/clientVersion.ts";
