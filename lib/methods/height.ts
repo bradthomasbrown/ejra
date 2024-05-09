@@ -1,9 +1,9 @@
+import * as jra from 'https://cdn.jsdelivr.net/gh/bradbrown-llc/jra@0.1.1/mod.ts'
 import * as schemas from "schemas/mod.ts";
-import { call } from "lib/mod.ts";
 
-export function height(rpc: string) {
+export async function height(rpc: string) {
   const method = "eth_blockNumber";
-  const params = [] as const;
+  const params:never[] = [];
   const schema = schemas.quantity;
-  return call(rpc, method, params, schema);
+  return schema.parse(await new jra.Client(rpc).request(method, params, 0))
 }
