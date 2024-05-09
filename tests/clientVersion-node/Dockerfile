@@ -1,3 +1,4 @@
 FROM denoland/deno:alpine-1.43.1
-WORKDIR /test
+WORKDIR /ejra
 COPY . .
+WORKDIR /ejra/tests/clientVersion-node
