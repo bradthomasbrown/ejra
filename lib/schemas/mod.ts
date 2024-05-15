@@ -1,3 +1,3 @@
-export * from "schemas/string.ts";
-export * from "schemas/quantity.ts";
-export * from "schemas/number.ts";
+export * from "./string.ts";
+export * from "./quantity.ts";
+export * from "./number.ts";
