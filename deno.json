@@ -1,9 +1,0 @@
-{
-  "imports": {
-    "types/": "./lib/types/",
-    "schemas/": "./lib/schemas/",
-    "methods/": "./lib/methods/",
-    "lib/": "./lib/",
-    "zod": "https://deno.land/x/zod@v3.23.6/mod.ts"
-  }
-}
