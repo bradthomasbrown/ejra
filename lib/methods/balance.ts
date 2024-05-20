@@ -4,7 +4,7 @@ import { Tag } from '../types/Tag.ts';
 
 export async function balance(rpc: string, address:string, tag:Tag) {
   const method = "eth_getBalance";
-  const params = [address, `0x${tag.toString(16)}`];
+  const params = [address, typeof tag == 'bigint' ? `0x${tag.toString(16)}` : tag];
   const schema = schemas.quantity;
   return schema.parse(await new jra.Client(rpc).request(method, params, 0))
 }

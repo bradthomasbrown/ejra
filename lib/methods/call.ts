@@ -20,7 +20,7 @@ export async function call(rpc: string, txCallObject:TxCallObject, tag:Tag) {
       value?:string
       input?:string
   },
-    `0x${tag.toString(16)}`
+    typeof tag == 'bigint' ? `0x${tag.toString(16)}` : tag
   ]
   const schema = schemas.string;
   return schema.parse(await new jra.Client(rpc).request(method, params, 0))

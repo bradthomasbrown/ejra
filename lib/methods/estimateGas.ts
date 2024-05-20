@@ -20,7 +20,7 @@ export async function estimateGas(rpc: string, txCallObject:Partial<TxCallObject
       value?:string
       input?:string
   },
-    `0x${tag.toString(16)}`
+    typeof tag == 'bigint' ? `0x${tag.toString(16)}` : tag
   ]
   const schema = schemas.quantity;
   return schema.parse(await new jra.Client(rpc).request(method, params, 0))
