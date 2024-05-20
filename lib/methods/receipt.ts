@@ -4,6 +4,6 @@ import * as schemas from "../schemas/mod.ts";
 export async function receipt(rpc:string, hash:string) {
   const method = "eth_getTransactionReceipt";
   const params:[hash:string] = [hash];
-  const schema = schemas.log.array();
+  const schema = schemas.receipt;
   return schema.parse(await new jra.Client(rpc).request(method, params, 0))
 }
