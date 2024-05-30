@@ -15,6 +15,7 @@ export class Node {
     sendRawTx:(data:string)=>ReturnType<typeof methods.sendRawTx>
     slot:(address:string,slot:bigint,tag:Tag)=>ReturnType<typeof methods.slot>
     code:(address:string,tag:Tag)=>ReturnType<typeof methods.code>
+    traceTx:(hash:string)=>ReturnType<typeof methods.traceTx>
     constructor(rpc:string) {
         this.rpc = rpc
         this.balance = (address:string, tag:Tag) => methods.balance(rpc, address, tag)
@@ -28,5 +29,6 @@ export class Node {
         this.sendRawTx = (data:string) => methods.sendRawTx(rpc, data)
         this.slot = (address:string, slot:bigint, tag:Tag) => methods.slot(rpc, address, slot, tag)
         this.code = (address:string, tag:Tag) => methods.code(rpc, address, tag)
+        this.traceTx = (hash:string) => methods.traceTx(rpc, hash)
     }
 }
