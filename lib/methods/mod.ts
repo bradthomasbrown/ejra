@@ -7,3 +7,5 @@ export * from "./height.ts";
 export * from "./sendRawTx.ts";
 export * from "./receipt.ts"
 export * from './balance.ts'
+export * from './slot.ts'
+export * from './code.ts'
