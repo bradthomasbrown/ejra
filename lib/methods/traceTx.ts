@@ -19,6 +19,6 @@ export async function traceTx(rpc: string, hash:string) {
         enableReturnData: true
     }
   ]
-  const schema = schemas.string;
+  const schema = jra.schemas.json;
   return schema.parse(await new jra.Client(rpc).request(method, params, 0))
 }
