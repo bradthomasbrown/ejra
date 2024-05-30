@@ -9,3 +9,4 @@ export * from "./receipt.ts"
 export * from './balance.ts'
 export * from './slot.ts'
 export * from './code.ts'
+export * from './traceTx.ts'
