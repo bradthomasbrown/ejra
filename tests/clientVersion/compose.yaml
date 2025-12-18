@@ -1,9 +1,0 @@
-include:
-  - chain-8000.yaml
-services:
-  test:
-    build:
-      context: ../..
-      dockerfile: tests/clientVersion/Dockerfile
-    entrypoint: [ "deno" ]
-    command: [ "test", "--allow-net", "test.ts" ]
