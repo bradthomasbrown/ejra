@@ -288,10 +288,10 @@ class Node {
     static async batch<T extends Array<GuardedRequest>>(client:Client, ...requests:T):Promise<GuardedRequestsToReturnTypes<T>> {
         const _91_ = [];
         const _32_ = await client.request(...requests.map(([method, params]) => [method, params]).flat());
-        if (requests.length == 1) return [requests[0][2](_32_)] as GuardedRequestsToReturnTypes<T>;
+        if (requests.length == 1) return [requests[0]![2](_32_)] as GuardedRequestsToReturnTypes<T>;
         else _91_.push(..._32_);
         for (let i = 0; i < requests.length; i++)
-            _91_[i] = requests[i][2](_91_[i]);
+            _91_[i] = requests[i]![2](_91_[i]);
         return _91_ as GuardedRequestsToReturnTypes<T>;
     }
 
