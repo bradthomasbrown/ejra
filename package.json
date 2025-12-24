@@ -1,7 +1,7 @@
 {
     "name": "@bradthomasbrown/ejra",
     "description": "Minimal, unoptimized, and unaudited EVM (Ethereum and similar) JSON RPC API library in JavaScript/TypeScript.",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "author": "Brad Brown <https://t.me/bradthomasbrown>",
     "type": "module",
     "files": [
