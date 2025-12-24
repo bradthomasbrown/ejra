@@ -192,7 +192,7 @@ function sendRawTransaction(data:string) {
 }
 
 function call(object:TxCallObject, tag:Tag) {
-    const method = "eth_sendRawTransaction";
+    const method = "eth_call";
     const params:[TxCallObject, Tag] = [object, tag];
     const guard = String;
     return tuple(method, params, guard);
