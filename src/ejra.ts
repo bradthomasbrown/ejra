@@ -267,7 +267,7 @@ class Node {
         const _92_ = _2f4955_(this.client);
         this.clientVersion = _92_(clientVersion);
         this.chainId = _92_(chainId);
-        this.gasPrice = _92_(chainId);
+        this.gasPrice = _92_(gasPrice);
         this.blockNumber = _92_(blockNumber);
         this.getBalance = _92_(getBalance);
         this.getStorageAt = _92_(getStorageAt);
