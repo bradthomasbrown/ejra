@@ -173,7 +173,7 @@ function getStorageAt(address:string, index:bigint, tag:Tag) {
 function getTransactionCount(address:string, tag:Tag) {
     const method = "eth_getTransactionCount";
     const params:[string, Tag] = [address, tag];
-    const guard = String;
+    const guard = BigInt;
     return tuple(method, params, guard);
 }
 
