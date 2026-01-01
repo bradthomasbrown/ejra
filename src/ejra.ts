@@ -281,8 +281,8 @@ class Node {
         this.traceTransaction = _92_(traceTransaction);
     }
 
-    batch<T extends Array<GuardedRequest>>(...requests:T):Promise<GuardedRequestsToReturnTypes<T>> {
-        return Node.batch(this.client, ...requests);
+    async batch<T extends Array<GuardedRequest>>(...requests:T):Promise<GuardedRequestsToReturnTypes<T>> {
+        return await Node.batch(this.client, ...requests);
     }
 
     static async batch<T extends Array<GuardedRequest>>(client:Client, ...requests:T):Promise<GuardedRequestsToReturnTypes<T>> {
